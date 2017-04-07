@@ -11,7 +11,7 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 -- -----------------------------------------------------
 -- Schema myFridgeDB
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `myFridgeDB` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
+CREATE SCHEMA IF NOT EXISTS `myFridgeDB` DEFAULT CHARACTER SET utf8 ;
 USE `myFridgeDB` ;
 
 -- -----------------------------------------------------
@@ -29,7 +29,7 @@ ENGINE = InnoDB;
 -- Table `myFridgeDB`.`ingredients`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `myFridgeDB`.`ingredients` (
-  `ingID` INT NOT NULL,
+  `ingID` INT GENERATED ALWAYS AS () VIRTUAL,
   `iname` VARCHAR(45) NULL,
   `dateLogged` INT NULL,
   `quantity` INT NULL,
@@ -50,10 +50,10 @@ ENGINE = InnoDB;
 -- Table `myFridgeDB`.`recipie`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `myFridgeDB`.`recipie` (
-  `desc` VARCHAR(200) NOT NULL,
+  `rname` VARCHAR(200) NOT NULL,
   `difficulty` INT NULL,
   `instructions` VARCHAR(250) NULL,
-  `recipieID` INT NOT NULL,
+  `recipieID` INT GENERATED ALWAYS AS () VIRTUAL,
   `category` VARCHAR(60) NULL,
   `users_userid` INT NOT NULL,
   PRIMARY KEY (`recipieID`, `users_userid`),
@@ -91,4 +91,3 @@ ENGINE = InnoDB;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
-
